@@ -22,7 +22,8 @@ export interface Pokemon {
 export const PokemonsTableDef: TableDefinition = {
   attributes: {
     id: {
-      type: DataTypes.UUIDV4,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
     name: {
