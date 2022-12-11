@@ -2,6 +2,9 @@
 *.env
 *config.ts
 
+# Database
+*.sqlite
+
 # Logs
 logs
 *.log

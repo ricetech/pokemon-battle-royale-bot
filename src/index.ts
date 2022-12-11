@@ -3,6 +3,7 @@ import { DISCORD_TOKEN } from "./config";
 import Client from "./types/Client";
 import Commands from "./commands";
 import registerInteractionCreateListener from "./listeners/InteractionCreateListener";
+import { db } from "./state";
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -17,4 +18,6 @@ client.login(DISCORD_TOKEN).then(() => {
   }
 
   registerInteractionCreateListener(client);
+
+  db.initializeTables();
 });

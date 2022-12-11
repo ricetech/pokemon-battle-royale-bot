@@ -22,7 +22,9 @@
   },
   "homepage": "https://github.com/ricetech/pokemon-battle-royale-bot#readme",
   "dependencies": {
-    "discord.js": "^14.7.1"
+    "discord.js": "^14.7.1",
+    "sequelize": "^6.26.0",
+    "sqlite3": "^5.1.2"
   },
   "devDependencies": {
     "@types/node": "^18.11.13",
