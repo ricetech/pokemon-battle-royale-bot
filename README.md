@@ -4,7 +4,7 @@ A custom Discord Bot to run the Pokemon Battle Royale game.
 
 ## Setup
 
-You'll need to host your own instance of this bot in order to use it. 
+You'll need to host your own instance of this bot in order to use it.
 
 1. Download [Node.JS LTS](https://nodejs.org/en/).
 2. Clone or download this repo.
