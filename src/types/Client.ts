@@ -2,7 +2,7 @@ import { SlashCommand } from "./SlashCommand";
 import { Client as DiscClient } from "discord.js";
 
 class Client extends DiscClient {
-  commands: SlashCommand[] = [];
+  commands = new Map<string, SlashCommand>();
 }
 
 export default Client;
