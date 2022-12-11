@@ -1,5 +1,6 @@
-import { Client, Events, GatewayIntentBits } from "discord.js";
+import { Events, GatewayIntentBits } from "discord.js";
 import { DISCORD_TOKEN } from "./config";
+import Client from "./types/Client";
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
