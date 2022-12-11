@@ -1,22 +1,20 @@
-import { DataTypes } from "sequelize";
-import { Player } from "./Player";
+import { DataTypes, Model } from "sequelize";
 import { TableDefinition } from "../types/TableDefinition";
 
-export interface Pokemon {
-  id: string;
-  name: string;
-  type1: string;
-  type2: string;
-  level: number;
-  hp: number;
-  atk: number;
-  canEvolveAtLvl: boolean;
-  evolvesAtLvl?: number;
-  canEvolveWithItem: boolean;
-  evolvesWithItem?: string;
-  evolution: number;
-  legendary: boolean;
-  player?: Player;
+export class Pokemon extends Model {
+  declare id: string;
+  declare name: string;
+  declare type1: string;
+  declare type2: string;
+  declare level: number;
+  declare hp: number;
+  declare atk: number;
+  declare canEvolveAtLvl: boolean;
+  declare evolvesAtLvl?: number;
+  declare canEvolveWithItem: boolean;
+  declare evolvesWithItem?: string;
+  declare evolution: number;
+  declare legendary: boolean;
 }
 
 export const PokemonsTableDef: TableDefinition = {

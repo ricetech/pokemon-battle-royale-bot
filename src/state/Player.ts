@@ -1,14 +1,10 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { Snowflake } from "discord.js";
-import { Pokemon } from "./Pokemon";
-import { Team } from "./Team";
 import { TableDefinition } from "../types/TableDefinition";
 
-export interface Player {
-  id: Snowflake;
-  coins: number;
-  pokemon?: Pokemon[];
-  team?: Team;
+export class Player extends Model {
+  declare id: Snowflake;
+  declare coins: number;
 }
 
 export const PlayersTableDef: TableDefinition = {

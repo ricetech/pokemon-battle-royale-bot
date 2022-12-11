@@ -1,20 +1,15 @@
 // noinspection JSIgnoredPromiseFromCall
 
 import { Model, ModelStatic, Sequelize } from "sequelize";
-import { TeamsTableDef } from "./Team";
-import { PlayersTableDef } from "./Player";
-import { PokemonsTableDef } from "./Pokemon";
-import { ItemsTableDef } from "./Item";
+import { Team, TeamsTableDef } from "./Team";
+import { Player, PlayersTableDef } from "./Player";
+import { Pokemon, PokemonsTableDef } from "./Pokemon";
+import { Item, ItemsTableDef } from "./Item";
 
 class Database {
   private static _instance: Database;
   sequelize: Sequelize;
-  items: ModelStatic<Model<any, any>>;
-  players: ModelStatic<Model<any, any>>;
-  // I KNOW THIS ISN'T GRAMMATICALLY CORRECT, DKM
-  pokemons: ModelStatic<Model<any, any>>;
-  teams: ModelStatic<Model<any, any>>;
-  tables: ModelStatic<Model<any, any>>[];
+  models: ModelStatic<Model<any, any>>[];
 
   private constructor() {
     this.sequelize = new Sequelize("database", "user", "password", {
@@ -23,36 +18,33 @@ class Database {
       logging: false,
       storage: "pokemon-battle-royale.sqlite",
     });
-    this.items = this.sequelize.define("item", ItemsTableDef.attributes);
-    this.players = this.sequelize.define("player", PlayersTableDef.attributes);
-    this.pokemons = this.sequelize.define(
-      "pokemon",
-      PokemonsTableDef.attributes
-    );
-    this.teams = this.sequelize.define("teams", TeamsTableDef.attributes);
+    Item.init(ItemsTableDef.attributes, { sequelize: this.sequelize });
+    Player.init(PlayersTableDef.attributes, { sequelize: this.sequelize });
+    Pokemon.init(PokemonsTableDef.attributes, { sequelize: this.sequelize });
+    Team.init(TeamsTableDef.attributes, { sequelize: this.sequelize });
 
-    this.tables = [this.items, this.players, this.pokemons, this.teams];
+    this.models = [Item, Player, Pokemon, Team];
   }
 
   initializeTables() {
-    for (const table of this.tables) {
+    for (const table of this.models) {
       table.sync();
     }
 
     // Relationships
     // 1 to many
-    this.teams.hasMany(this.players);
-    this.players.belongsTo(this.teams);
+    Team.hasMany(Player);
+    Player.belongsTo(Team);
 
-    this.players.hasMany(this.pokemons);
-    this.pokemons.belongsTo(this.players);
+    Player.hasMany(Pokemon);
+    Pokemon.belongsTo(Player);
 
-    this.players.hasMany(this.items);
-    this.items.belongsTo(this.players);
+    Player.hasMany(Item);
+    Item.belongsTo(Player);
 
     // 1 to 1
-    this.pokemons.hasOne(this.items);
-    this.items.belongsTo(this.pokemons);
+    Pokemon.hasOne(Item);
+    Item.belongsTo(Pokemon);
   }
 
   public static get Instance() {

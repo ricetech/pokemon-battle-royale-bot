@@ -1,5 +1,4 @@
-import { DataTypes } from "sequelize";
-import { Player } from "./Player";
+import { DataTypes, Model } from "sequelize";
 import { TableDefinition } from "../types/TableDefinition";
 
 export enum ItemType {
@@ -7,11 +6,10 @@ export enum ItemType {
   REPEL = "REPEL",
 }
 
-export interface Item {
-  id: string;
-  name: string;
-  type: ItemType;
-  player?: Player;
+export class Item extends Model {
+  declare id: string;
+  declare name: string;
+  declare type: ItemType;
 }
 
 export const ItemsTableDef: TableDefinition = {

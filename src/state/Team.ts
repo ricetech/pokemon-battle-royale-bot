@@ -1,11 +1,9 @@
-import { DataTypes } from "sequelize";
-import { Player } from "./Player";
+import { DataTypes, Model } from "sequelize";
 import { TableDefinition } from "../types/TableDefinition";
 
-export interface Team {
-  name: string;
-  color: string;
-  players?: Player[];
+export class Team extends Model {
+  declare name: string;
+  declare color: string;
 }
 
 export const TeamsTableDef: TableDefinition = {
