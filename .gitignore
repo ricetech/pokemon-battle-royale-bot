@@ -1,5 +1,6 @@
 # Config files
 *.env
+*config.ts
 
 # Logs
 logs
