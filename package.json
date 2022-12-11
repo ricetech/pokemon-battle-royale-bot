@@ -4,7 +4,11 @@
   "description": "A Discord Bot for the Pokemon Battle Royale game.",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx tsc && (cd build && pm2 start index.js)",
+    "start:dev": "nodemon",
+    "build": "npx tsc",
+    "lint": "eslint . --ext .ts"
   },
   "repository": {
     "type": "git",
