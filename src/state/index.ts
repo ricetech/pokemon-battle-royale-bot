@@ -5,6 +5,7 @@ import { Team, TeamsTableDef } from "./Team";
 import { Player, PlayersTableDef } from "./Player";
 import { Pokemon, PokemonsTableDef } from "./Pokemon";
 import { Item, ItemsTableDef } from "./Item";
+import { ARGS_DEV } from "../util";
 
 class Database {
   private static _instance: Database;
@@ -16,7 +17,9 @@ class Database {
       host: "localhost",
       dialect: "sqlite",
       logging: false,
-      storage: "pokemon-battle-royale.sqlite",
+      storage: ARGS_DEV
+        ? "pokemon-battle-royale_TEST.sqlite"
+        : "pokemon-battle-royale.sqlite",
     });
     Item.init(ItemsTableDef.attributes, { sequelize: this.sequelize });
     Player.init(PlayersTableDef.attributes, { sequelize: this.sequelize });
