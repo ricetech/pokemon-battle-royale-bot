@@ -27,26 +27,26 @@ const CreateTeamCommand: SlashCommand = {
     if (interaction.isChatInputCommand()) {
       const name = interaction.options.getString("name");
       const color = interaction.options.getString("color");
+      await interaction.deferReply();
       // Null checks
       if (!name) {
-        await interaction.reply(
+        await interaction.followUp(
           "Error: Name was not provided! Please try again."
         );
         return;
       }
       if (!color) {
-        await interaction.reply(
+        await interaction.followUp(
           "Error: Color was not provided! Please try again."
         );
         return;
       }
       // Validation
       if (!color.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)) {
-        await interaction.reply(
+        await interaction.followUp(
           "Error: The color provided is not a valid RGB hex code. Please try again using a hex code in the format `#ABCDEF`."
         );
       }
-      await interaction.deferReply();
       try {
         await db.sequelize.transaction(async (transaction) => {
           return await Team.create(
