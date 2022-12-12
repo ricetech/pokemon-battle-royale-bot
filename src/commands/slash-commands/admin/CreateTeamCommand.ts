@@ -57,7 +57,9 @@ const CreateTeamCommand: SlashCommand = {
             { transaction }
           );
         });
-        await interaction.followUp("Team created successfully!");
+        await interaction.followUp(
+          `The team '${name}' was successfully created with team color \`${color}\`!`
+        );
       } catch (e) {
         await interaction.followUp(
           "Error: Could not write to the database. Please contact the developer."
