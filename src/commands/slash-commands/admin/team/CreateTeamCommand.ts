@@ -76,10 +76,16 @@ const CreateTeamCommand: SlashCommand = {
           `The team '${name}' was successfully created with team color \`${color}\` and role <@&${roleId}>!`
         );
       } catch (e) {
-        console.error(e);
-        await interaction.followUp(
-          "Error: Could not write to the database. Please contact the developer."
-        );
+        if (e instanceof Error && e.name === "SequelizeUniqueConstraintError") {
+          await interaction.followUp(
+            "Error: A team with the name '${name}' already exists! Please try again with a different name."
+          );
+        } else {
+          console.error(e);
+          await interaction.followUp(
+            "Error: Could not write to the database. Please contact the developer."
+          );
+        }
       }
     } else {
       await interaction.followUp(
