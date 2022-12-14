@@ -5,6 +5,7 @@ export class Team extends Model {
   declare id: string;
   declare name: string;
   declare color: string;
+  declare roleId: string;
 }
 
 export const TeamsTableDef: TableDefinition = {
@@ -19,6 +20,10 @@ export const TeamsTableDef: TableDefinition = {
       allowNull: false,
     },
     color: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    roleId: {
       type: DataTypes.STRING,
       allowNull: false,
     },

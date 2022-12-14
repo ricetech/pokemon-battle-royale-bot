@@ -22,11 +22,18 @@ const CreateTeamCommand: SlashCommand = {
         .setDescription("A hex code (with #) for the team color.")
         .setRequired(true)
     )
+    .addRoleOption((option) =>
+      option
+        .setName("role")
+        .setDescription("The server role associated with the team.")
+        .setRequired(true)
+    )
     .setDefaultMemberPermissions(ADMIN_COMMAND_PERMISSIONS_FLAG),
   async execute(client: Client, interaction: CommandInteraction) {
     if (interaction.isChatInputCommand()) {
       const name = interaction.options.getString("name");
       const color = interaction.options.getString("color");
+      let role = interaction.options.getRole("role");
       await interaction.deferReply();
       // Null checks
       if (!name) {
@@ -41,24 +48,32 @@ const CreateTeamCommand: SlashCommand = {
         );
         return;
       }
+      if (!role) {
+        await interaction.followUp(
+          "Error: Role was not provided! Please try again."
+        );
+        return;
+      }
       // Validation
       if (!color.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)) {
         await interaction.followUp(
           "Error: The color provided is not a valid RGB hex code. Please try again using a hex code in the format `#ABCDEF`."
         );
       }
+      const roleId = role.id;
       try {
         await db.sequelize.transaction(async (transaction) => {
           return await Team.create(
             {
               name,
               color,
+              roleId,
             },
             { transaction }
           );
         });
         await interaction.followUp(
-          `The team '${name}' was successfully created with team color \`${color}\`!`
+          `The team '${name}' was successfully created with team color \`${color}\` and role <@&${roleId}>!`
         );
       } catch (e) {
         console.error(e);
