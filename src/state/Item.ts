@@ -22,6 +22,7 @@ export const ItemsTableDef: TableDefinition = {
     },
     name: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
     type: {
       type: DataTypes.STRING,
