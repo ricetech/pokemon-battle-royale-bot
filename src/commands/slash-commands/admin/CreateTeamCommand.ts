@@ -61,6 +61,7 @@ const CreateTeamCommand: SlashCommand = {
           `The team '${name}' was successfully created with team color \`${color}\`!`
         );
       } catch (e) {
+        console.error(e);
         await interaction.followUp(
           "Error: Could not write to the database. Please contact the developer."
         );
