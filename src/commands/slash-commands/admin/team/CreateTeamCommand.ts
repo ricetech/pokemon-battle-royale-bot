@@ -1,9 +1,9 @@
-import { SlashCommand } from "../../../types/SlashCommand";
+import { SlashCommand } from "../../../../types/SlashCommand";
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { Client, CommandInteraction } from "discord.js";
-import { ADMIN_COMMAND_PERMISSIONS_FLAG } from "./admin-permissions-flag";
-import { db } from "../../../state";
-import { Team } from "../../../state/Team";
+import { ADMIN_COMMAND_PERMISSIONS_FLAG } from "../admin-permissions-flag";
+import { db } from "../../../../state";
+import { Team } from "../../../../state/Team";
 
 const CreateTeamCommand: SlashCommand = {
   data: new SlashCommandBuilder()
