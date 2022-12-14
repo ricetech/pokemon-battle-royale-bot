@@ -1,5 +1,10 @@
 import Client from "../types/Client";
-import { Events, Interaction, CommandInteraction } from "discord.js";
+import {
+  Events,
+  Interaction,
+  CommandInteraction,
+  AutocompleteInteraction,
+} from "discord.js";
 
 const registerInteractionCreateListener = (client: Client) => {
   client.on(
@@ -7,6 +12,8 @@ const registerInteractionCreateListener = (client: Client) => {
     async (interaction: Interaction): Promise<void> => {
       if (interaction.isChatInputCommand()) {
         await handleSlashCommand(client, interaction);
+      } else if (interaction.isAutocomplete()) {
+        await handleAutocomplete(client, interaction);
       }
     }
   );
@@ -33,6 +40,26 @@ const handleSlashCommand = async (
       content: `There was an error while executing this command. Contact the developer.`,
       ephemeral: true,
     });
+  }
+};
+
+const handleAutocomplete = async (
+  client: Client,
+  interaction: AutocompleteInteraction
+): Promise<void> => {
+  const command = client.commands.get(interaction.commandName);
+
+  if (!command || !command.autocomplete) {
+    console.error(
+      `Error: The command '${interaction.commandName}' could not be found.`
+    );
+    return;
+  }
+
+  try {
+    await command.autocomplete(client, interaction);
+  } catch (e) {
+    console.error(e);
   }
 };
 
