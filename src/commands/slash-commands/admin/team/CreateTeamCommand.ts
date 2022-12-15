@@ -61,6 +61,12 @@ const CreateTeamCommand: SlashCommand = {
         );
       }
       const roleId = role.id;
+      if (interaction.inGuild() && role.id == interaction.guildId) {
+        await interaction.followUp(
+          "Error: You cannot assign @everyone to a Team! Please try again using a dedicated team role."
+        );
+        return;
+      }
       try {
         await db.sequelize.transaction(async (transaction) => {
           return await Team.create(
