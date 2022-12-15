@@ -59,6 +59,7 @@ const CreateTeamCommand: SlashCommand = {
         await interaction.followUp(
           "Error: The color provided is not a valid RGB hex code. Please try again using a hex code in the format `#ABCDEF`."
         );
+        return;
       }
       const roleId = role.id;
       if (interaction.inGuild() && role.id == interaction.guildId) {
