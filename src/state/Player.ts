@@ -15,6 +15,7 @@ export const PlayersTableDef: TableDefinition = {
     },
     coins: {
       type: DataTypes.INTEGER,
+      defaultValue: 0,
     },
   },
 };
