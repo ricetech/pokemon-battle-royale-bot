@@ -5,7 +5,10 @@ import Commands from "./commands";
 import registerInteractionCreateListener from "./listeners/InteractionCreateListener";
 import { db } from "./state";
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({
+  intents: [GatewayIntentBits.Guilds],
+  allowedMentions: { parse: ["users", "roles"], repliedUser: true },
+});
 
 client.once(Events.ClientReady, (c) => {
   console.log(`Ready! Logged in as ${c.user.tag}`);
