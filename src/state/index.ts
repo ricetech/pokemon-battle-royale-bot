@@ -21,22 +21,15 @@ class Database {
         ? "pokemon-battle-royale_TEST.sqlite"
         : "pokemon-battle-royale.sqlite",
     });
-    Item.init(ItemsTableDef.attributes, { sequelize: this.sequelize });
-    Player.init(PlayersTableDef.attributes, { sequelize: this.sequelize });
-    Pokemon.init(PokemonsTableDef.attributes, { sequelize: this.sequelize });
-    Team.init(TeamsTableDef.attributes, { sequelize: this.sequelize });
 
     this.models = [Item, Player, Pokemon, Team];
   }
 
   initializeModels() {
-    for (const model of this.models) {
-      if (ARGS_DEV) {
-        model.sync({ alter: true, match: /_TEST$/ });
-      } else {
-        model.sync();
-      }
-    }
+    Item.init(ItemsTableDef.attributes, { sequelize: this.sequelize });
+    Player.init(PlayersTableDef.attributes, { sequelize: this.sequelize });
+    Pokemon.init(PokemonsTableDef.attributes, { sequelize: this.sequelize });
+    Team.init(TeamsTableDef.attributes, { sequelize: this.sequelize });
 
     // Relationships
     // 1 to many
@@ -52,6 +45,14 @@ class Database {
     // 1 to 1
     Pokemon.hasOne(Item);
     Item.belongsTo(Pokemon);
+
+    for (const model of this.models) {
+      if (ARGS_DEV) {
+        model.sync({ alter: true, match: /_TEST$/ });
+      } else {
+        model.sync();
+      }
+    }
   }
 
   public static get Instance() {
