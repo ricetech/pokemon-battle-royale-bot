@@ -25,7 +25,7 @@ class Database {
     this.models = [Item, Player, Pokemon, Team];
   }
 
-  initializeModels() {
+  async initializeModels() {
     Item.init(ItemsTableDef.attributes, { sequelize: this.sequelize });
     Player.init(PlayersTableDef.attributes, { sequelize: this.sequelize });
     Pokemon.init(PokemonsTableDef.attributes, { sequelize: this.sequelize });
@@ -48,9 +48,9 @@ class Database {
 
     for (const model of this.models) {
       if (ARGS_DEV) {
-        model.sync({ alter: true, match: /_TEST$/ });
+        await model.sync({ alter: true, match: /_TEST$/ });
       } else {
-        model.sync();
+        await model.sync();
       }
     }
   }

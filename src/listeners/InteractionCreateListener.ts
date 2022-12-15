@@ -6,8 +6,8 @@ import {
   AutocompleteInteraction,
 } from "discord.js";
 
-const registerInteractionCreateListener = (client: Client) => {
-  client.on(
+const registerInteractionCreateListener = async (client: Client) => {
+  await client.on(
     Events.InteractionCreate,
     async (interaction: Interaction): Promise<void> => {
       if (interaction.isChatInputCommand()) {

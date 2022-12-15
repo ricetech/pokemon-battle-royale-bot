@@ -11,13 +11,13 @@ client.once(Events.ClientReady, (c) => {
   console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
-client.login(DISCORD_TOKEN).then(() => {
+client.login(DISCORD_TOKEN).then(async () => {
   // Load commands into Map
   for (const command of Commands) {
     client.commands.set(command.data.name, command);
   }
 
-  registerInteractionCreateListener(client);
+  await registerInteractionCreateListener(client);
 
-  db.initializeModels();
+  await db.initializeModels();
 });
