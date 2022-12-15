@@ -7,7 +7,7 @@ const JoinTeamCommand: SlashCommand = {
     .setName("jointeam")
     .setDescription("Join a team."),
   async execute(client: Client, interaction: CommandInteraction) {
-    await interaction.reply("Not implemented yet!");
+    await interaction.reply(`Not implemented yet!`);
   },
 };
 

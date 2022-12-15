@@ -26,7 +26,7 @@ const DeleteTeamCommand: SlashCommand = {
       // Null checks
       if (!name) {
         await interaction.followUp(
-          "Error: Name was not provided! Please try again."
+          `Error: Name was not provided! Please try again.`
         );
         return;
       }
@@ -49,12 +49,12 @@ const DeleteTeamCommand: SlashCommand = {
       } catch (e) {
         console.error(e);
         await interaction.followUp(
-          "Error: Could not write to the database. Please contact the developer."
+          `Error: Could not write to the database. Please contact the developer.`
         );
       }
     } else {
       await interaction.followUp(
-        "Error: Interaction is not a command. Please contact the developer."
+        `Error: Interaction is not a command. Please contact the developer.`
       );
     }
   },

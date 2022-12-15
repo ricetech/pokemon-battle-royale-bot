@@ -38,33 +38,33 @@ const CreateTeamCommand: SlashCommand = {
       // Null checks
       if (!name) {
         await interaction.followUp(
-          "Error: Name was not provided! Please try again."
+          `Error: Name was not provided! Please try again.`
         );
         return;
       }
       if (!color) {
         await interaction.followUp(
-          "Error: Color was not provided! Please try again."
+          `Error: Color was not provided! Please try again.`
         );
         return;
       }
       if (!role) {
         await interaction.followUp(
-          "Error: Role was not provided! Please try again."
+          `Error: Role was not provided! Please try again.`
         );
         return;
       }
       // Validation
       if (!color.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)) {
         await interaction.followUp(
-          "Error: The color provided is not a valid RGB hex code. Please try again using a hex code in the format `#ABCDEF`."
+          `Error: The color provided is not a valid RGB hex code. Please try again using a hex code in the format \`#ABCDEF\`.`
         );
         return;
       }
       const roleId = role.id;
       if (interaction.inGuild() && role.id == interaction.guildId) {
         await interaction.followUp(
-          "Error: You cannot assign @everyone to a Team! Please try again using a dedicated team role."
+          `Error: You cannot assign @everyone to a Team! Please try again using a dedicated team role.`
         );
         return;
       }
@@ -85,12 +85,12 @@ const CreateTeamCommand: SlashCommand = {
       } catch (e) {
         if (e instanceof Error && e.name === "SequelizeUniqueConstraintError") {
           await interaction.followUp(
-            "Error: A team with the name '${name}' already exists! Please try again with a different name."
+            `Error: A team with the name '${name}' already exists! Please try again with a different name.`
           );
         } else {
           console.error(e);
           await interaction.followUp(
-            "Error: Could not write to the database. Please contact the developer."
+            `Error: Could not write to the database. Please contact the developer.`
           );
         }
       }
