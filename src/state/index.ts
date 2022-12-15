@@ -29,9 +29,9 @@ class Database {
     this.models = [Item, Player, Pokemon, Team];
   }
 
-  initializeTables() {
-    for (const table of this.models) {
-      table.sync();
+  initializeModels() {
+    for (const model of this.models) {
+      model.sync();
     }
 
     // Relationships

@@ -19,5 +19,5 @@ client.login(DISCORD_TOKEN).then(() => {
 
   registerInteractionCreateListener(client);
 
-  db.initializeTables();
+  db.initializeModels();
 });
