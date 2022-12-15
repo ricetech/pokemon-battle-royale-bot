@@ -31,7 +31,11 @@ class Database {
 
   initializeModels() {
     for (const model of this.models) {
-      model.sync();
+      if (ARGS_DEV) {
+        model.sync({ alter: true, match: /_TEST$/ });
+      } else {
+        model.sync();
+      }
     }
 
     // Relationships
